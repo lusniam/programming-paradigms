@@ -1,3 +1,4 @@
+import Data.Either
 -- pol 1: 
 -- mod po lewej stronie zostanie wykonane jako funkcja,
 -- a funkcje maja priorytet 10, gdy operator ^ ma priorytet 8
@@ -13,19 +14,56 @@
 
 abs3 x = -x
 
-pierw x = if x >= 0 then sqrt x else error "Pierwiastek z liczby ujemnej"
+pierw x =
+    if x >= 0
+        then sqrt x
+        else error "Pierwiastek z liczby ujemnej"
 
-delta :: Double -> Double -> Double -> Double
+
+
+
+
+
+
 delta a b c = b*b - 4*a*c
 
-pdelta :: Double -> Double -> Double -> Double
-pdelta a b c = if d >= 0
-                    then sqrt d
-                    else error "Pierwiastek z liczby ujemnej"
-                    where d=delta a b c
+pdelta a b c =
+    if d >= 0
+        then sqrt d
+    else error "delta<0"
+    where d = delta a b c
 
-mzerowe :: Double -> Double -> Double -> (Double, Double)
-mzerowe a b c = if d >= 0
-                    then ((-b - pdelta a b c) / (2*a), (-b + pdelta a b c) / (2*a))
-                    else error "Brak miejsc zerowych"
-                    where d=delta a b c
+mzerowe a b c =
+    if d > 0
+        then [x1,x2]
+    else if d == 0
+             then [x0]
+         else error "delta<0"
+    where
+        d = delta a b c
+        p = pdelta a b c
+        x1 = (-b-p)/2*a
+        x2 = (-b+p)/2*a
+        x0 = -b/2*a
+
+mzerowe2 a b c
+    | d > 0 = [x1,x2]
+    | d == 0 = [x0]
+    | otherwise = error "delta<0"
+    where
+        d = delta a b c
+        p = pdelta a b c
+        x1 = (-b-p)/2*a
+        x2 = (-b+p)/2*a
+        x0 = -b/2*a
+mzerowe3 a b c =
+    case compare d 0 of
+        GT -> [x1,x2]
+        EQ -> [x0]
+        LT -> error "delta<0"
+    where
+        d = delta a b c
+        p = pdelta a b c
+        x1 = (-b-p)/2*a
+        x2 = (-b+p)/2*a
+        x0 = -b/2*a
