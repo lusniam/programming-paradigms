@@ -5,36 +5,25 @@ sign1 x =
             then 0
             else -1
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
 sign2 x
     | x > 0 = 1
     | x == 0 = 0
     | otherwise = -1
-sign3 x =
-    case x of
-        x | x > 0 -> 1
-        x | x == 0 -> 0
-        _ -> -1
 
-compare :: Ord a => a -> a -> Ordering
-compare x y
+sign3 x =
+    case compare x 0 of
+        GT -> 1
+        EQ -> 0
+        LT -> -1
+
+sign4 x = case x == 0 of
+    True -> 0
+    False -> x `div` abs x
+
+
+
+compare2 :: Ord a => a -> a -> Ordering
+compare2 x y
     | x > y = GT
     | x == y = EQ
     | otherwise = LT
@@ -47,12 +36,13 @@ mul2 :: Int -> Int -> Int
 mul2 1 b = b
 mul2 a b = b + mul2 (a-1) b
 
-mul3 :: Int -> Int -> Int
 mul3 a b
-    | abs a == 1 = b
     | a > 0 = b + mul3 (a - 1) b
-    | a < 0 = (-1) * (b + mul3 (abs a - 1) b)
+    | a < 0 = (-1) * mul3 (-a) b
     | otherwise = 0
+
+
+
 
 silnia1 :: Int -> Int
 silnia1 n
@@ -80,3 +70,18 @@ fib n = fib' n 0 1
     where
         fib' 0 a b = a
         fib' n a b = fib' (n-1) b (a+b)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

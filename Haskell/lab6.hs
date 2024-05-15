@@ -1,4 +1,3 @@
-import Data.Either
 -- pol 1: 
 -- mod po lewej stronie zostanie wykonane jako funkcja,
 -- a funkcje maja priorytet 10, gdy operator ^ ma priorytet 8
@@ -19,12 +18,6 @@ pierw x =
         then sqrt x
         else error "Pierwiastek z liczby ujemnej"
 
-
-
-
-
-
-
 delta a b c = b*b - 4*a*c
 
 pdelta a b c =
@@ -42,9 +35,10 @@ mzerowe a b c =
     where
         d = delta a b c
         p = pdelta a b c
-        x1 = (-b-p)/2*a
-        x2 = (-b+p)/2*a
-        x0 = -b/2*a
+        x1 = (-b-p)/(2*a)
+        x2 = (-b+p)/(2*a)
+        x0 = -b/(2*a)
+
 
 mzerowe2 a b c
     | d > 0 = [x1,x2]
@@ -53,9 +47,10 @@ mzerowe2 a b c
     where
         d = delta a b c
         p = pdelta a b c
-        x1 = (-b-p)/2*a
-        x2 = (-b+p)/2*a
-        x0 = -b/2*a
+        x1 = (-b-p)/(2*a)
+        x2 = (-b+p)/(2*a)
+        x0 = -b/(2*a)
+
 mzerowe3 a b c =
     case compare d 0 of
         GT -> [x1,x2]
@@ -64,6 +59,6 @@ mzerowe3 a b c =
     where
         d = delta a b c
         p = pdelta a b c
-        x1 = (-b-p)/2*a
-        x2 = (-b+p)/2*a
-        x0 = -b/2*a
+        x1 = (-b-p)/(2*a)
+        x2 = (-b+p)/(2*a)
+        x0 = -b/(2*a)
